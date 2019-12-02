@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <style>
+      @import url('https://fonts.googleapis.com/css?family=Solway&display=swap');
+
+      body {
+         font-family: Solway;
+         position: absolute;
+      }
+
+      h1 {
+         margin-left: 30vw;
+         margin-top: 1vh;
+         position: absolute;
+         width: 50vw;
+         font-size: 5vw;
+      }
+
+      h2 {
+         left: 5vw;
+         font-size: 5vw;
+         box-sizing: border-box;
+         position: absolute;
+      }
+
+      h3 {
+         top: 10vh;
+         font-size: 3vw;
+         position: absolute;
+      }
+
+      #hour {
+         left: 23vw;
+      }
+      #minute {
+         left: 45vw;
+      }
+      #second {
+         left: 70vw;
+      }
+
+      #t1 {
+         top: 80vh;
+      }
+      #t2 {
+         top: 60vh;
+      }
+      #t4 {
+         top: 40vh;
+      }
+      #t8 {
+         top: 20vh;
+      }
+
+      .container #min {
+         left: 50vw;
+      }
+
+      .clock {
+         border: 2px solid black;
+         border-radius: 50%;
+         height: 5vw;
+         width: 5vw;
+         position: absolute;
+         transition: .5s;
+      }
+
+      .container .h-a{
+         left: 30vw;
+      }
+      .container .h-b{
+         left: 20vw;
+      }
+
+      .container .m-a {
+         left: 55vw;
+      }
+      .container .m-b {
+         left: 45vw;
+      }
+
+      .container .s-a {
+         left: 80vw;
+      }
+      .container .s-b {
+         left: 70vw;
+      }
+
+      #h1, #h10 {
+         top:90vh;
+      }
+      #h2, #h20 {
+         top: 70vh;
+      }
+      #h4 {
+         top:50vh;
+      }
+      #h8 {
+         top: 30vh;
+      }
+
+
+      #m1, #m10 {
+         top: 90vh;
+      }
+      #m2, #m20 {
+         top: 70vh;
+      }
+      #m4, #m40 {
+         top: 50vh;
+      }
+      #m8 {
+         top: 30vh;
+      }
+
+
+      #s1, #s10 {
+         top: 90vh;
+      }
+      #s2, #s20 {
+         top: 70vh;
+      }
+      #s4, #s40 {
+         top: 50vh;
+      }
+      #s8 {
+         top: 30vh;
+      }
+      
+      .container .clock:hover {
+        animation: animate 1s infinite;
+      }
+
+      @keyframes animate {
+         0% {
+            transform: scale(1.0);
+         }
+         50% {
+            transform: scale(2.5);
+            border-radius: 10%;
+         }
+         100% {
+            transform: scale(1.0) ;
+         }
+      }
+   </style>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <title>Binary clock</title>
+</head>
+<body>
+   <h1>Binary clock</h1>
+   <h2 id="t1">1</h2>
+   <h2 id="t2">2</h2>
+   <h2 id="t4">4</h2>
+   <h2 id="t8">8</h2>
+   <h3 id="hour">HOURS</h3>
+   <h3 id="minute">MINUTES</h3>
+   <h3 id="second">SECONDS</h3>
+   <script src="script.js"></script>
+   <div class="container">
+      
+      <div class="clock h-a" id="h1" ></div>
+      <div class="clock h-a" id="h2" ></div>
+      <div class="clock h-a" id="h4" ></div>
+      <div class="clock h-a" id="h8" ></div>
+      <div class="clock h-b" id="h10" ></div>
+      <div class="clock h-b" id="h20" ></div>
+
+      <div class="clock m-a" id="m1" ></div>
+      <div class="clock m-a" id="m2" ></div>
+      <div class="clock m-a" id="m4" ></div>
+      <div class="clock m-a" id="m8" ></div>
+      <div class="clock m-b" id="m10" ></div>
+      <div class="clock m-b" id="m20" ></div>
+      <div class="clock m-b" id="m40" ></div>
+
+      <div class="clock s-a" id="s1" ></div>
+      <div class="clock s-a" id="s2" ></div>
+      <div class="clock s-a" id="s4" ></div>
+      <div class="clock s-a" id="s8" ></div>
+      <div class="clock s-b" id="s10" ></div>
+      <div class="clock s-b" id="s20" ></div>
+      <div class="clock s-b" id="s40" ></div>
+   </div>
+   <script type="text/javascript">
+      var today = new Date();
+      var b = "#0000ff", g = "#00ff00", r = "#ff0000", w = "white";
+      var sec, min, hour;
+
+      function actualize(){
+         var day = new Date();
+         hour = day.getHours();
+         min = day.getMinutes();
+         sec = day.getSeconds();
+
+         var sa = Math.floor(sec % 10);
+         var ma = Math.floor(min % 10);
+         var ha = Math.floor(hour % 10);
+         var sb = Math.floor((sec / 10) % 10);
+         var mb = Math.floor((min / 10) % 10);
+         var hb = Math.floor((hour / 10) % 10);
+         $(".clock").css("backgroundColor", "white");
+         if (sa === 1){$("#s1").css("backgroundColor", r);};
+         if (sa === 2){$("#s2").css("backgroundColor", r);};
+         if (sa === 3){$("#s2").css("backgroundColor", r); $("#s1").css("backgroundColor", "red");};
+         if (sa === 4){$("#s4").css("backgroundColor", r);};
+         if (sa === 5){$("#s4").css("backgroundColor", r); $("#s1").css("backgroundColor", "red");};
+         if (sa === 6){$("#s4").css("backgroundColor", r); $("#s2").css("backgroundColor", "red");};
+         if (sa === 7){$("#s4").css("backgroundColor", r); $("#s2").css("backgroundColor", "red"); $("#s1").css("backgroundColor", "red");};
+         if (sa === 8){$("#s8").css("backgroundColor", r);};
+         if (sa === 9){$("#s8").css("backgroundColor", r); $("#s1").css("backgroundColor", "red");};  
+         if(sb === 1){$("#s10").css("backgroundColor", r)};
+         if(sb === 2){$("#s20").css("backgroundColor", r)};
+         if(sb === 3){$("#s20").css("backgroundColor", r); $("#s10").css("backgroundColor", r);};
+         if(sb === 4){$("#s40").css("backgroundColor", r)};
+         if(sb === 5){$("#s40").css("backgroundColor", r); $("#s10").css("backgroundColor", r);};
+
+         if (ma === 1){$("#m1").css("backgroundColor", g);};
+         if (ma === 2){$("#m2").css("backgroundColor", g);};
+         if (ma === 3){$("#m2").css("backgroundColor", g); $("#m1").css("backgroundColor", g);};
+         if (ma === 4){$("#m4").css("backgroundColor", g);};
+         if (ma === 5){$("#m4").css("backgroundColor", g); $("#m1").css("backgroundColor", g);};
+         if (ma === 6){$("#m4").css("backgroundColor", g); $("#m2").css("backgroundColor", g);};
+         if (ma === 7){$("#m4").css("backgroundColor", g); $("#m2").css("backgroundColor", g); $("#m1").css("backgroundColor", g);};
+         if (ma === 8){$("#m8").css("backgroundColor", g);};
+         if (ma === 9){$("#m8").css("backgroundColor", g); $("#m1").css("backgroundColor", g);}; 
+         
+         if(mb === 1){$("#m10").css("backgroundColor", g)};
+         if(mb === 2){$("#m20").css("backgroundColor", g)};
+         if(mb === 3){$("#m20").css("backgroundColor", g); $("#m10").css("backgroundColor", g);};
+         if(mb === 4){$("#m40").css("backgroundColor", g)};
+         if(mb === 5){$("#m40").css("backgroundColor", g); $("#m10").css("backgroundColor", g);};
+
+         if (ha === 1){$("#h1").css("backgroundColor", b);};
+         if (ha === 2){$("#h2").css("backgroundColor", b);};
+         if (ha === 3){$("#h2").css("backgroundColor", b); $("#h1").css("backgroundColor", b);};
+         if (ha === 4){$("#h4").css("backgroundColor", b);};
+         if (ha === 5){$("#h4").css("backgroundColor", b); $("#h1").css("backgroundColor", b);};
+         if (ha === 6){$("#h4").css("backgroundColor", b); $("#h2").css("backgroundColor", b);};
+         if (ha === 7){$("#h4").css("backgroundColor", b); $("#h2").css("backgroundColor", b); $("#h1").css("backgroundColor", b);};
+         if (ha === 8){$("#h8").css("backgroundColor", b);};
+         if (ha === 9){$("#h8").css("backgroundColor", b); $("#h1").css("backgroundColor", b);};  
+
+         if (hb === 1){$("#h10").css("backgroundColor", b);};
+         if (hb === 2){$("#h20").css("backgroundColor", b);};
+      };
+
+      setInterval(actualize);
+   </script>
+</body>
+</html>
