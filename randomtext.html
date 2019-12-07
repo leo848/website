@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title id="title">Document</title>
+   <style>
+      html {
+         font-family: Inconsolata, Inconsolata;
+         font-weight: 100;
+      }
+      h1 {
+         width: 90vw;
+         height: 80vh;
+         text-align: center;
+         align-items: center;
+         box-sizing: border-box;
+         position: absolute;
+         padding-top: 0vh;
+         font-size: 100px;
+         font-weight: 100;
+         animation: animate 10s infinite;
+      }
+
+      h1::selection {
+         color: red;
+         font-size: larger;
+      }
+
+      @keyframes animate {
+         from {
+            transform: rotateY(0deg) rotateX(50deg);
+         }
+         to {
+            transform: rotateY(360deg) rotateX(50deg);
+         }
+      }
+      #bottom {
+         position: absolute;
+         bottom: 1vh;
+      }
+   </style>
+</head>
+<body>
+   <noscript>
+      <h1 style="z-index: 1000; font-size: 20vmin; background: chartreuse;">Ohne JavaScript funktioniert diese Website leider nicht vollständig.</h1>
+   </noscript>
+   <h1 id="h1">Hallo Leute!</h1>
+   <script>
+      function makeid(length) {
+         var result           = '';
+         var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ     abcdefghijklmnopqrstuvwxyz..,,--'; // !numbers not included
+         var charactersLength = characters.length;
+         for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            console.log(result);
+         }
+         return result;
+      }
+
+
+      function ok (){
+         var msg = new SpeechSynthesisUtterance(document.getElementById("h1").textContent);
+         window.speechSynthesis.speak(msg);
+      }
+
+      /* setInterval(function(){
+         var msg = new SpeechSynthesisUtterance(document.getElementById("h1").textContent);
+         window.speechSynthesis.speak(msg);
+      }) */
+      
+      document.getElementById("h1").innerHTML = makeid(25);
+      document.getElementById("title").innerHTML = makeid(10);
+      
+       setTimeout (function() {setInterval(function(){
+            document.getElementById("h1").innerHTML = "<br>"; 
+            document.getElementById("h1").innerHTML = makeid(25);
+            
+         },10000)},4500);
+
+      setInterval(function(){
+         document.getElementById("title").innerHTML = makeid(10);
+
+      })
+   </script>
+</body>
+</html>
